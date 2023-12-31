@@ -1,3 +1,5 @@
+import Pedido from './Pedido';
+
 export default class PedidoEletronicos extends Pedido {
   constructor() {
     super();

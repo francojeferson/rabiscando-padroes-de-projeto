@@ -1,7 +1,9 @@
-export default class PedidoMoveis extends Pedido {
+import Pedido from './Pedido';
+
+export default class PedidoEletronicos extends Pedido {
   constructor() {
     super();
-    this.nomeSetor = 'Móveis';
+    this.nomeSetor = 'Eletrônicos';
   }
 
   getNomeSetor() {

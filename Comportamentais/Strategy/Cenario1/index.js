@@ -8,3 +8,7 @@ pedido.setValor(100);
 console.log('Frete Comum: R$' + pedido.calculaFreteComum());
 // Cálculo do frete Expresso.
 console.log('Frete Expresso: R$' + pedido.calculaFreteExpresso());
+
+// Saída:
+// Frete Comum: R$5.00
+// Frete Expresso: R$10.00

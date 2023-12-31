@@ -25,6 +25,8 @@ classDiagram
   }
 ```
 
+> Diagrama de classes do exemplo no Cenario1
+
 Imagine que agora o e-commerce cresceu e foi dividido em setores. Os pedidos de cada setor possuem características diferentes, de modo a ser necessária a criação de uma classe de pedido para cada setor. Inicialmente existirão dois setores, móveis e eletrônicos. Neste caso basta transformar a superclasse **Pedido** em uma superclasse abstrata, que por sua vez implementa os métodos responsáveis por calcular os diferentes tipos de frete. Os pedidos de cada setor, que são subclasses, herdam as características da classe **Pedido**, e graças a herança também passam a saber calcular os diferentes tipos de frete.
 
 ```mermaid
@@ -51,6 +53,8 @@ classDiagram
     +setNomeSetor() void
   }
 ```
+
+> Diagrama de classes do exemplo no Cenario2
 
 Tudo certo até agora, mas considere que o setor de móveis fica em um estado do Brasil onde o frete comum é o único disponível. Temos um problema, pois devido a herança todas as subclasses de **Pedido** podem calcular todos os tipos de frete, porém, a subclasse **PedidoMoveis** deveria aceitar apenas o frete econômico.
 
@@ -84,6 +88,8 @@ classDiagram
     +calculaFreteExpresso() float
   }
 ```
+
+> Diagrama de classes do exemplo no Cenario3
 
 Com essa solução, cada subpedido controla seus fretes e a subclasse **PedidoMoveis** pode bloquear o frete expresso dentro dela. A desvantagem dessa abordagem é que não existe reaproveitamento de código. Repare que o método `calculaFreteComum()` é exatamente igual nas duas subclasses, se ele mudar, todas as subclasses de **Pedido** deverão ser editadas. No momento existem apenas duas subclasses, mas imagine se forem dez. Essa edição de todas as subclasses além de ser muito trabalhosa pode permitir o surgimento de _bugs_ no processo.
 
@@ -146,6 +152,8 @@ classDiagram
   }
 ```
 
+> Diagrama de classes do exemplo no Cenario4 (utilizando o padrão _Strategy_)
+
 ## Aplicabilidade (quando utilizar?)
 
 - O padrão é aplicado quando muitas classes fazem a mesma coisa de forma diferente.
@@ -187,6 +195,8 @@ classDiagram
     +comportamento()
   }
 ```
+
+> Diagrama de classes do padrão _Strategy_ (genérico)
 
 ## Consequências
 
