@@ -16,36 +16,36 @@ Uma solução seria implementar os métodos de cálculo de frete na classe **Ped
 
 ```mermaid
 classDiagram
-  class Pedido {
-    -valor float
-    +getValor() float
-    +setValor() void
-    +calculaFreteComum() float
-    +calculaFreteExpresso() float
-  }
+    class Pedido {
+      -valor float
+      +getValor() float
+      +setValor() void
+      +calculaFreteComum() float
+      +calculaFreteExpresso() float
+    }
 ```
 
 Imagine que agora o e-commerce cresceu e foi dividido em setores. Os pedidos de cada setor possuem características diferentes, de modo a ser necessária a criação de uma classe de pedido para cada setor. Inicialmente existirão dois setores, móveis e eletrônicos. Neste caso basta transformar a superclasse **Pedido** em uma superclasse abstrata, que por sua vez implementa os métodos responsáveis por calcular os diferentes tipos de frete. Os pedidos de cada setor, que são subclasses, herdam as características da classe **Pedido**, e graças a herança também passam a saber calcular os diferentes tipos de frete.
 
 ```mermaid
 classDiagram
-  Pedido: -valor float
-  Pedido: +getValor() float
-  Pedido: +setValor() void
-  Pedido: +calculaFreteComum() float
-  Pedido: +calculaFreteExpresso() float
-  Pedido <|-- PedidoEletronicos: extends
-  Pedido <|-- PedidoMoveis: extends
-  class PedidoEletronicos {
-    -nomeSetor string
-    +getNomeSetor() string
-    +setNomeSetor() void
-  }
-  class PedidoMoveis {
-    -nomeSetor string
-    +getNomeSetor() string
-    +setNomeSetor() void
-  }
+    Pedido: -valor float
+    Pedido: +getValor() float
+    Pedido: +setValor() void
+    Pedido: +calculaFreteComum() float
+    Pedido: +calculaFreteExpresso() float
+    Pedido <|-- PedidoEletronicos: extends
+    Pedido <|-- PedidoMoveis: extends
+    class PedidoEletronicos {
+      -nomeSetor string
+      +getNomeSetor() string
+      +setNomeSetor() void
+    }
+    class PedidoMoveis {
+      -nomeSetor string
+      +getNomeSetor() string
+      +setNomeSetor() void
+    }
 ```
 
 Tudo certo até agora, mas considere que o setor de móveis fica em um estado do Brasil onde o frete comum é o único disponível. Temos um problema, pois devido a herança todas as subclasses de **Pedido** podem calcular todos os tipos de frete, porém, a subclasse **PedidoMoveis** deveria aceitar apenas o frete econômico.
@@ -54,27 +54,27 @@ Tudo certo até agora, mas considere que o setor de móveis fica em um estado do
 
 ```mermaid
 classDiagram
-  Pedido: -valor float
-  Pedido: +getValor() float
-  Pedido: +setValor() void
-  Pedido: +calculaFreteComum() float
-  Pedido: +calculaFreteExpresso() float
-  Pedido <|-- PedidoEletronicos: extends
-  Pedido <|-- PedidoMoveis: extends
-  class PedidoEletronicos {
-    -nomeSetor string
-    +getNomeSetor() string
-    +setNomeSetor() void
-    +calculaFreteComum() float
-    +calculaFreteExpresso() float
-  }
-  class PedidoMoveis {
-    -nomeSetor string
-    +getNomeSetor() string
-    +setNomeSetor() void
-    +calculaFreteComum() float
-    +calculaFreteExpresso() float
-  }
+    Pedido: -valor float
+    Pedido: +getValor() float
+    Pedido: +setValor() void
+    Pedido: +calculaFreteComum() float
+    Pedido: +calculaFreteExpresso() float
+    Pedido <|-- PedidoEletronicos: extends
+    Pedido <|-- PedidoMoveis: extends
+    class PedidoEletronicos {
+      -nomeSetor string
+      +getNomeSetor() string
+      +setNomeSetor() void
+      +calculaFreteComum() float
+      +calculaFreteExpresso() float
+    }
+    class PedidoMoveis {
+      -nomeSetor string
+      +getNomeSetor() string
+      +setNomeSetor() void
+      +calculaFreteComum() float
+      +calculaFreteExpresso() float
+    }
 ```
 
 Com essa solução, cada subpedido controla seus fretes e a subclasse **PedidoMoveis** pode bloquear o frete expresso dentro dela. A desvantagem dessa abordagem é que não existe reaproveitamento de código. Repare que o método `calculaFreteComum()` é exatamente igual nas duas subclasses, se ele mudar, todas as subclasses de **Pedido** deverão ser editadas. No momento existem apenas duas subclasses, mas imagine se forem dez. Essa edição de todas as subclasses além de ser muito trabalhosa pode permitir o surgimento de _bugs_ no processo.
@@ -98,37 +98,37 @@ Com isso o algoritmo fica mais flexível, o tipo de frete passa a ser definido d
 
 ```mermaid
 classDiagram
-  Pedido: -valor float
-  Pedido: -tipoFrete Frete
-  Pedido: +getValor() float
-  Pedido: +setValor() void
-  Pedido: +setTipoFrete(Frete $frete) void
-  Pedido: +calculaFrete() float
-  Pedido <|-- PedidoEletronicos: extends
-  Pedido <|-- PedidoMoveis: extends
-  Pedido o-- Frete : aggregate (Frete $frete)
-  class PedidoEletronicos {
-    -nomeSetor string
-    +getNomeSetor() string
-    +setNomeSetor() void
-  }
-  class PedidoMoveis {
-    -nomeSetor string
-    +getNomeSetor() string
-    +setNomeSetor() void
-  }
-  class Frete {
-    <<interface>>
-    +calcula(float valorPedido) float
-  }
-  Frete <|.. FreteComum: implements
-  Frete <|.. FreteExpresso: implements
-  class FreteComum {
-    +calcula(float valorPedido) float
-  }
-  class FreteExpresso {
-    +calcula(float valorPedido) float
-  }
+    Pedido: -valor float
+    Pedido: -tipoFrete Frete
+    Pedido: +getValor() float
+    Pedido: +setValor() void
+    Pedido: +setTipoFrete(Frete $frete) void
+    Pedido: +calculaFrete() float
+    Pedido <|-- PedidoEletronicos: extends
+    Pedido <|-- PedidoMoveis: extends
+    Pedido o-- Frete : aggregate (Frete $frete)
+    class PedidoEletronicos {
+      -nomeSetor string
+      +getNomeSetor() string
+      +setNomeSetor() void
+    }
+    class PedidoMoveis {
+      -nomeSetor string
+      +getNomeSetor() string
+      +setNomeSetor() void
+    }
+    class Frete {
+      <<interface>>
+      +calcula(float valorPedido) float
+    }
+    Frete <|.. FreteComum: implements
+    Frete <|.. FreteExpresso: implements
+    class FreteComum {
+      +calcula(float valorPedido) float
+    }
+    class FreteExpresso {
+      +calcula(float valorPedido) float
+    }
 ```
 
 ## Aplicabilidade (quando utilizar?)
@@ -146,25 +146,25 @@ classDiagram
 
 ```mermaid
 classDiagram
-  Contexto: instanciaDeStrategy Strategy
-  Contexto: +solicitacao()
-  Contexto o-- Strategy: aggregate (Strategy $comportamento)
-  class Strategy {
-    <<interface>>
-    +comportamento()
-  }
-  Strategy <|.. EstrategiaConcretaA: implements
-  Strategy <|.. EstrategiaConcretaB: implements
-  Strategy <|.. EstrategiaConcretaC: implements
-  class EstrategiaConcretaA {
-    +comportamento()
-  }
-  class EstrategiaConcretaB {
-    +comportamento()
-  }
-  class EstrategiaConcretaC {
-    +comportamento()
-  }
+    Contexto: instanciaDeStrategy Strategy
+    Contexto: +solicitacao()
+    Contexto o-- Strategy: aggregate (Strategy $comportamento)
+    class Strategy {
+      <<interface>>
+      +comportamento()
+    }
+    Strategy <|.. EstrategiaConcretaA: implements
+    Strategy <|.. EstrategiaConcretaB: implements
+    Strategy <|.. EstrategiaConcretaC: implements
+    class EstrategiaConcretaA {
+      +comportamento()
+    }
+    class EstrategiaConcretaB {
+      +comportamento()
+    }
+    class EstrategiaConcretaC {
+      +comportamento()
+    }
 ```
 
 ## Consequências
