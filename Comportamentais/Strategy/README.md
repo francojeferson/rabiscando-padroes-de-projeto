@@ -17,11 +17,11 @@ Uma solução seria implementar os métodos de cálculo de frete na classe **Ped
 ```mermaid
 classDiagram
   class Pedido {
-    -valor float
-    +getValor() float
+    -valor number
+    +getValor() number
     +setValor() void
-    +calculaFreteComum() float
-    +calculaFreteExpresso() float
+    +calculaFreteComum() number
+    +calculaFreteExpresso() number
   }
 ```
 
@@ -32,11 +32,11 @@ Imagine que agora o e-commerce cresceu e foi dividido em setores. Os pedidos de 
 ```mermaid
 classDiagram
   class Pedido {
-    -valor float
-    +getValor() float
+    -valor number
+    +getValor() number
     +setValor() void
-    +calculaFreteComum() float
-    +calculaFreteExpresso() float
+    +calculaFreteComum() number
+    +calculaFreteExpresso() number
   }
   Pedido <|-- PedidoEletronicos: extends
   Pedido <|-- PedidoMoveis: extends
@@ -63,11 +63,11 @@ Tudo certo até agora, mas considere que o setor de móveis fica em um estado do
 ```mermaid
 classDiagram
   class Pedido {
-    -valor float
-    +getValor() float
+    -valor number
+    +getValor() number
     +setValor() void
-    +calculaFreteComum() float
-    +calculaFreteExpresso() float
+    +calculaFreteComum() number
+    +calculaFreteExpresso() number
   }
   Pedido <|-- PedidoEletronicos: extends
   Pedido <|-- PedidoMoveis: extends
@@ -76,16 +76,16 @@ classDiagram
     -nomeSetor string
     +getNomeSetor() string
     +setNomeSetor() void
-    +calculaFreteComum() float
-    +calculaFreteExpresso() float
+    +calculaFreteComum() number
+    +calculaFreteExpresso() number
   }
 
   class PedidoMoveis {
     -nomeSetor string
     +getNomeSetor() string
     +setNomeSetor() void
-    +calculaFreteComum() float
-    +calculaFreteExpresso() float
+    +calculaFreteComum() number
+    +calculaFreteExpresso() number
   }
 ```
 
@@ -113,12 +113,12 @@ Com isso o algoritmo fica mais flexível, o tipo de frete passa a ser definido d
 ```mermaid
 classDiagram
   class Pedido {
-    -valor float
+    -valor number
     -tipoFrete Frete
-    +getValor() float
+    +getValor() number
     +setValor() void
     +setTipoFrete(Frete $frete) void
-    +calculaFrete() float
+    +calculaFrete() number
   }
   Pedido <|-- PedidoEletronicos: extends
   Pedido <|-- PedidoMoveis: extends
@@ -138,17 +138,17 @@ classDiagram
 
   class Frete {
     <<interface>>
-    +calcula(float valorPedido) float
+    +calcula(number valorPedido) number
   }
   Frete <|.. FreteComum: implements
   Frete <|.. FreteExpresso: implements
 
   class FreteComum {
-    +calcula(float valorPedido) float
+    +calcula(number valorPedido) number
   }
 
   class FreteExpresso {
-    +calcula(float valorPedido) float
+    +calcula(number valorPedido) number
   }
 ```
 

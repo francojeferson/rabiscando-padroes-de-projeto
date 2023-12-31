@@ -1,7 +1,7 @@
 import PedidoMoveis from './PedidoMoveis';
 
 //Criação de um pedido do setor de Móveis. (O teste seria semelhante para Eletrônicos).
-let pedido = new PedidoMoveis();
+const pedido = new PedidoMoveis();
 // Atribuição do valor;
 pedido.setValor(100);
 //Cálculos dos dois tipos de frete

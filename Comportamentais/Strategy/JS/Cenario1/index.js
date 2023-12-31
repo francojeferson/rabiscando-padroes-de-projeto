@@ -1,7 +1,7 @@
 import Pedido from './Pedido';
 
 // Criação do pedido.
-let pedido = new Pedido();
+const pedido = new Pedido();
 // Atribuição do valor;
 pedido.setValor(100);
 // Cálculo do frete comum.
