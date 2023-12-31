@@ -36,13 +36,11 @@ classDiagram
   Pedido: +calculaFreteExpresso() float
   Pedido <|-- PedidoEletronicos: extends
   Pedido <|-- PedidoMoveis: extends
-
   class PedidoEletronicos {
     -nomeSetor string
     +getNomeSetor() string
     +setNomeSetor() void
   }
-
   class PedidoMoveis {
     -nomeSetor string
     +getNomeSetor() string
@@ -63,7 +61,6 @@ classDiagram
   Pedido: +calculaFreteExpresso() float
   Pedido <|-- PedidoEletronicos: extends
   Pedido <|-- PedidoMoveis: extends
-
   class PedidoEletronicos {
     -nomeSetor string
     +getNomeSetor() string
@@ -71,7 +68,6 @@ classDiagram
     +calculaFreteComum() float
     +calculaFreteExpresso() float
   }
-
   class PedidoMoveis {
     -nomeSetor string
     +getNomeSetor() string
@@ -111,30 +107,25 @@ classDiagram
   Pedido <|-- PedidoEletronicos: extends
   Pedido <|-- PedidoMoveis: extends
   Pedido o-- Frete : aggregate (Frete $frete)
-
   class PedidoEletronicos {
     -nomeSetor string
     +getNomeSetor() string
     +setNomeSetor() void
   }
-
   class PedidoMoveis {
     -nomeSetor string
     +getNomeSetor() string
     +setNomeSetor() void
   }
-
   class Frete {
     <<interface>>
     +calcula(float valorPedido) float
   }
   Frete <|.. FreteComum: implements
   Frete <|.. FreteExpresso: implements
-
   class FreteComum {
     +calcula(float valorPedido) float
   }
-
   class FreteExpresso {
     +calcula(float valorPedido) float
   }
@@ -158,7 +149,6 @@ classDiagram
   Contexto: instanciaDeStrategy Strategy
   Contexto: +solicitacao()
   Contexto o-- Strategy: aggregate (Strategy $comportamento)
-
   class Strategy {
     <<interface>>
     +comportamento()
@@ -166,15 +156,12 @@ classDiagram
   Strategy <|.. EstrategiaConcretaA: implements
   Strategy <|.. EstrategiaConcretaB: implements
   Strategy <|.. EstrategiaConcretaC: implements
-
   class EstrategiaConcretaA {
     +comportamento()
   }
-
   class EstrategiaConcretaB {
     +comportamento()
   }
-
   class EstrategiaConcretaC {
     +comportamento()
   }
