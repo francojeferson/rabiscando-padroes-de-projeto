@@ -58,11 +58,13 @@ Tudo certo até agora, mas considere que o setor de móveis fica em um estado do
 
 ```mermaid
 classDiagram
-  Pedido: -valor float
-  Pedido: +getValor() float
-  Pedido: +setValor() void
-  Pedido: +calculaFreteComum() float
-  Pedido: +calculaFreteExpresso() float
+  class Pedido {
+    -valor float
+    +getValor() float
+    +setValor() void
+    +calculaFreteComum() float
+    +calculaFreteExpresso() float
+  }
   Pedido <|-- PedidoEletronicos: extends
   Pedido <|-- PedidoMoveis: extends
 
@@ -104,12 +106,14 @@ Com isso o algoritmo fica mais flexível, o tipo de frete passa a ser definido d
 
 ```mermaid
 classDiagram
-  Pedido: -valor float
-  Pedido: -tipoFrete Frete
-  Pedido: +getValor() float
-  Pedido: +setValor() void
-  Pedido: +setTipoFrete(Frete $frete) void
-  Pedido: +calculaFrete() float
+  class Pedido {
+    -valor float
+    -tipoFrete Frete
+    +getValor() float
+    +setValor() void
+    +setTipoFrete(Frete $frete) void
+    +calculaFrete() float
+  }
   Pedido <|-- PedidoEletronicos: extends
   Pedido <|-- PedidoMoveis: extends
   Pedido o-- Frete : aggregate (Frete $frete)
@@ -157,8 +161,10 @@ classDiagram
 
 ```mermaid
 classDiagram
-  Contexto: instanciaDeStrategy Strategy
-  Contexto: +solicitacao()
+  class Contexto {
+    instanciaDeStrategy Strategy
+    +solicitacao()
+  }
   Contexto o-- Strategy: aggregate (Strategy $comportamento)
 
   class Strategy {
