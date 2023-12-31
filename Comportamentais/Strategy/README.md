@@ -173,7 +173,7 @@ classDiagram
     instanciaDeStrategy Strategy
     +solicitacao()
   }
-  Contexto o-- Strategy: aggregate (Strategy $comportamento)
+  Contexto o-- Strategy: aggregate (Strategy comportamento)
 
   class Strategy {
     <<interface>>
