@@ -29,11 +29,13 @@ Imagine que agora o e-commerce cresceu e foi dividido em setores. Os pedidos de 
 
 ```mermaid
 classDiagram
-  Pedido: -valor float
-  Pedido: +getValor() float
-  Pedido: +setValor() void
-  Pedido: +calculaFreteComum() float
-  Pedido: +calculaFreteExpresso() float
+  class Pedido {
+    -valor float
+    +getValor() float
+    +setValor() void
+    +calculaFreteComum() float
+    +calculaFreteExpresso() float
+  }
   Pedido <|-- PedidoEletronicos: extends
   Pedido <|-- PedidoMoveis: extends
 
