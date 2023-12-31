@@ -66,8 +66,8 @@ classDiagram
     -valor number
     +getValor() number
     +setValor() void
-    +calculaFreteComum() number
-    +calculaFreteExpresso() number
+    +calculaFreteComum()* number
+    +calculaFreteExpresso()* number
   }
   Pedido <|-- PedidoEletronicos: extends
   Pedido <|-- PedidoMoveis: extends
@@ -101,8 +101,8 @@ Cada uma das classes implementam a interface **Frete**, portanto todas elas poss
 
 Com a criação das classes de frete, basta adaptar a classe abstrata **Pedido** para que ela tenha os seguintes métodos:
 
-- `setTipoFrete(Frete $frete)`: este método recebe como parâmetro um objeto que implementa a interface **Frete** e mantém a instância deste objeto em uma de suas variáveis internas.
-- `calculaFrete()`: tal método é o responsável por invocar o método `calcula()` do objeto que foi recebido por `setTipoFrete(Frete $frete)`.
+- `setTipoFrete(Frete tipoFrete)`: este método recebe como parâmetro um objeto que implementa a interface **Frete** e mantém a instância deste objeto em uma de suas variáveis internas.
+- `calculaFrete()`: tal método é o responsável por invocar o método `calcula()` do objeto que foi recebido por `setTipoFrete(Frete tipoFrete)`.
 
 Com isso o algoritmo fica mais flexível, o tipo de frete passa a ser definido dinamicamente em tempo de execução. Além disso passa a obedecer alguns princípios básicos da OO:
 
@@ -117,12 +117,12 @@ classDiagram
     -tipoFrete Frete
     +getValor() number
     +setValor() void
-    +setTipoFrete(Frete $frete) void
+    +setTipoFrete(Frete tipoFrete) void
     +calculaFrete() number
   }
   Pedido <|-- PedidoEletronicos: extends
   Pedido <|-- PedidoMoveis: extends
-  Pedido o-- Frete : aggregate (Frete $frete)
+  Pedido o-- Frete : aggregate (Frete tipoFrete)
 
   class PedidoEletronicos {
     -nomeSetor string
