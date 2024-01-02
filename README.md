@@ -7,3 +7,5 @@
 [Template Method](Comportamentais/TemplateMethod)
 
 [Observer](Comportamentais/Observer)
+
+[State](Comportamentais/State)
