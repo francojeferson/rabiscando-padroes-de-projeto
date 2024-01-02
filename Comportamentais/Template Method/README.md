@@ -151,6 +151,8 @@ classDiagram
   }
 ```
 
+> Diagrama de classes do padrão _Template Method_ (genérico)
+
 ## Consequências
 
 Os _Template Methods_:
